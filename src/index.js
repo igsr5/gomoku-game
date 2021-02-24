@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={()=>props.onClick()}>
+    <button className="square" onClick={props.onClick}>
     {props.value}
     </button>
   );
@@ -12,10 +12,16 @@ function Square(props) {
 
 function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null))
+  const [isNext, setIsNext] = useState('X')
+
+  function toggleIsNext() {
+    setIsNext(isNext === 'X' ? 'O' : 'X');
+  }
   
   function clickBtn(i) {
     var tmp = squares.slice();
-    tmp[i] = 'X';
+    toggleIsNext()
+    tmp[i] = isNext;
     setSquares(tmp)
   }
 
