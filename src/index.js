@@ -17,12 +17,14 @@ function Board() {
   function toggleIsNext() {
     setIsNext(isNext === 'X' ? 'O' : 'X');
   }
-  
+
   function clickBtn(i) {
-    var tmp = squares.slice();
-    toggleIsNext()
-    tmp[i] = isNext;
-    setSquares(tmp)
+    if(squares[i] === null){
+      var tmp = squares.slice();
+      toggleIsNext()
+      tmp[i] = isNext;
+      setSquares(tmp)
+    }
   }
 
   function renderSquare(i) {
@@ -30,7 +32,7 @@ function Board() {
   }
 
 
-  const status = 'Next player: X';
+  const status = 'Next player: ' + isNext;
 
   return (
     <div>
