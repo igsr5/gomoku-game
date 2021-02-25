@@ -10,8 +10,7 @@ function Square(props) {
   );
 }
 
-function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
+function Board(props) {
   const [isNext, setIsNext] = useState('X')
 
   function toggleIsNext() {
@@ -19,8 +18,8 @@ function Board() {
   }
 
   function clickBtn(i) {
-    if(squares[i] === null && winner === null){
-      var tmp = squares.slice();
+    if(props.squares[i] === null && winner === null){
+      var tmp = props.squares.slice();
       toggleIsNext()
       tmp[i] = isNext;
       setSquares(tmp)
@@ -28,7 +27,7 @@ function Board() {
   }
 
   function renderSquare(i) {
-    return <Square value={squares[i]} onClick={ ()=>clickBtn(i) } />;
+    return <Square value={props.squares[i]} onClick={ ()=>clickBtn(i) } />;
   }
 
   function calculateWinner(squares) {
@@ -51,7 +50,7 @@ function Board() {
     return null;
   }
 
-  const winner = calculateWinner(squares)
+  const winner = calculateWinner(props.squares)
   var status
   if (winner) {
     status = 'Winner: ' + winner
@@ -83,10 +82,12 @@ function Board() {
 
 function Game() {
     const [history, setHistory] = useState(Array(9).fill(null))
+    const [squares, setSquares] = useState(Array(9).fill(null))
+
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board squares={ squares }/>
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
