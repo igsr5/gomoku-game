@@ -19,7 +19,7 @@ function Board() {
   }
 
   function clickBtn(i) {
-    if(squares[i] === null){
+    if(squares[i] === null && winner === null){
       var tmp = squares.slice();
       toggleIsNext()
       tmp[i] = isNext;
